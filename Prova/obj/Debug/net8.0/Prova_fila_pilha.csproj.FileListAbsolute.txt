@@ -1,0 +1,5 @@
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Debug\net8.0\Prova_fila_pilha.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Debug\net8.0\Prova_fila_pilha.AssemblyInfoInputs.cache
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Debug\net8.0\Prova_fila_pilha.AssemblyInfo.cs
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Debug\net8.0\Prova_fila_pilha.csproj.CoreCompileInputs.cache
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Debug\net8.0\Prova_fila_pilha.sourcelink.json

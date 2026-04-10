@@ -1,0 +1,15 @@
+C:\Users\giova\Documents\Aulas_Ratz\Prova\bin\Release\net8.0\Prova_fila_pilha.exe
+C:\Users\giova\Documents\Aulas_Ratz\Prova\bin\Release\net8.0\Prova_fila_pilha.deps.json
+C:\Users\giova\Documents\Aulas_Ratz\Prova\bin\Release\net8.0\Prova_fila_pilha.runtimeconfig.json
+C:\Users\giova\Documents\Aulas_Ratz\Prova\bin\Release\net8.0\Prova_fila_pilha.dll
+C:\Users\giova\Documents\Aulas_Ratz\Prova\bin\Release\net8.0\Prova_fila_pilha.pdb
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.AssemblyInfoInputs.cache
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.AssemblyInfo.cs
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.csproj.CoreCompileInputs.cache
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.sourcelink.json
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.dll
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\refint\Prova_fila_pilha.dll
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.pdb
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\Prova_fila_pilha.genruntimeconfig.cache
+C:\Users\giova\Documents\Aulas_Ratz\Prova\obj\Release\net8.0\ref\Prova_fila_pilha.dll
