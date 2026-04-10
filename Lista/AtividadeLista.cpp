@@ -1,22 +1,15 @@
-// ============================================================
-//  Sistema de Gerenciamento de Atendimentos - Clínica Escola
-//  Estrutura de Dados: Lista Encadeada
-//  Linguagem: C++ Estruturado (sem STL)
-// ============================================================
- 
+
 #include <iostream>
 #include <cstring>
 #include <cctype>
  
 using namespace std;
  
-// ============================================================
-//  DEFINIÇÃO DA ESTRUTURA DE DADOS
-// ============================================================
+
  
 const int TAM_NOME   = 100;
 const int TAM_CURSO  = 60;
-const int TAM_DATA   = 11;   // dd/mm/aaaa + '\0'
+const int TAM_DATA   = 11;   
 const int TAM_STATUS = 30;
  
 struct Atendimento {
@@ -28,34 +21,23 @@ struct Atendimento {
     Atendimento* proximo;
 };
  
-// ============================================================
-//  CABEÇA DA LISTA (ponteiro global para o primeiro nó)
-// ============================================================
  
 Atendimento* lista = nullptr;
  
-// ============================================================
-//  FUNÇÕES AUXILIARES
-// ============================================================
- 
-// Limpa o buffer de entrada após leitura
 void limparBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
  
-// Lê uma string com espaços, limitada a 'tam-1' caracteres
 void lerString(const char* prompt, char* destino, int tam) {
     cout << prompt;
     cin.getline(destino, tam);
-    // Se getline falhou (buffer cheio), limpa o restante
     if (cin.fail()) {
         cin.clear();
         limparBuffer();
     }
 }
  
-// Lê um inteiro com validação básica
 int lerInteiro(const char* prompt) {
     int valor;
     while (true) {
@@ -70,7 +52,6 @@ int lerInteiro(const char* prompt) {
     }
 }
  
-// Verifica se já existe um atendimento com o código informado
 bool codigoExiste(int codigo) {
     Atendimento* atual = lista;
     while (atual != nullptr) {
@@ -81,7 +62,6 @@ bool codigoExiste(int codigo) {
     return false;
 }
  
-// Busca e retorna ponteiro para o nó com o código informado (ou nullptr)
 Atendimento* buscarPorCodigo(int codigo) {
     Atendimento* atual = lista;
     while (atual != nullptr) {
@@ -92,7 +72,6 @@ Atendimento* buscarPorCodigo(int codigo) {
     return nullptr;
 }
  
-// Exibe os dados de um único atendimento formatado
 void exibirAtendimento(const Atendimento* a) {
     cout << "  +------------------------------------------+\n";
     cout << "  | Codigo   : " << a->codigo            << "\n";
@@ -103,10 +82,6 @@ void exibirAtendimento(const Atendimento* a) {
     cout << "  +------------------------------------------+\n";
 }
  
-// ============================================================
-//  OPERAÇÃO 1 — INCLUIR ATENDIMENTO
-// ============================================================
- 
 void incluirAtendimento() {
     cout << "\n  === INCLUIR ATENDIMENTO ===\n";
  
@@ -116,7 +91,6 @@ void incluirAtendimento() {
         return;
     }
  
-    // Aloca novo nó
     Atendimento* novo = new Atendimento;
     novo->codigo    = codigo;
     novo->proximo   = nullptr;
@@ -126,18 +100,15 @@ void incluirAtendimento() {
     lerString("  Data (dd/mm/aaaa): ", novo->data,         TAM_DATA);
     lerString("  Status           : ", novo->status,       TAM_STATUS);
  
-    // Pergunta onde inserir
     cout << "  Inserir no (1) Inicio  ou  (2) Final? ";
     int opcao;
     cin >> opcao;
     limparBuffer();
  
     if (opcao == 1 || lista == nullptr) {
-        // Insercao no inicio
         novo->proximo = lista;
         lista = novo;
     } else {
-        // Insercao no final
         Atendimento* atual = lista;
         while (atual->proximo != nullptr)
             atual = atual->proximo;
@@ -146,10 +117,6 @@ void incluirAtendimento() {
  
     cout << "  [OK] Atendimento " << codigo << " cadastrado com sucesso.\n";
 }
- 
-// ============================================================
-//  OPERAÇÃO 2 — EXCLUIR ATENDIMENTO
-// ============================================================
  
 void excluirAtendimento() {
     cout << "\n  === EXCLUIR ATENDIMENTO ===\n";
@@ -174,7 +141,6 @@ void excluirAtendimento() {
         return;
     }
  
-    // Confirmar exclusao
     cout << "  Atendimento encontrado:\n";
     exibirAtendimento(atual);
     cout << "  Confirma a exclusao? (s/n): ";
@@ -187,19 +153,14 @@ void excluirAtendimento() {
         return;
     }
  
-    // Remove o no da lista
     if (anterior == nullptr)
-        lista = atual->proximo;       // era o primeiro nó
+        lista = atual->proximo;
     else
         anterior->proximo = atual->proximo;
  
     delete atual;
     cout << "  [OK] Atendimento " << codigo << " excluido com sucesso.\n";
 }
- 
-// ============================================================
-//  OPERAÇÃO 3 — LISTAR ATENDIMENTOS
-// ============================================================
  
 void listarAtendimentos() {
     cout << "\n  === LISTA DE ATENDIMENTOS ===\n";
@@ -219,10 +180,6 @@ void listarAtendimentos() {
     }
     cout << "\n  Total de atendimentos: " << contador << "\n";
 }
- 
-// ============================================================
-//  OPERAÇÃO 4 — ALTERAR ATENDIMENTO
-// ============================================================
  
 void alterarAtendimento() {
     cout << "\n  === ALTERAR ATENDIMENTO ===\n";
@@ -244,7 +201,6 @@ void alterarAtendimento() {
     exibirAtendimento(alvo);
     cout << "  (Deixe em branco para manter o valor atual)\n\n";
  
-    // Buffers temporarios para nao sobrescrever com vazio
     char temp[TAM_NOME];
  
     lerString("  Novo nome do paciente : ", temp, TAM_NOME);
@@ -262,10 +218,6 @@ void alterarAtendimento() {
     cout << "  [OK] Atendimento " << codigo << " atualizado com sucesso.\n";
 }
  
-// ============================================================
-//  OPERAÇÃO 5 — BUSCAR ATENDIMENTO (bônus)
-// ============================================================
- 
 void buscarAtendimento() {
     cout << "\n  === BUSCAR ATENDIMENTO ===\n";
  
@@ -279,10 +231,6 @@ void buscarAtendimento() {
     }
 }
  
-// ============================================================
-//  LIBERAR TODA A MEMÓRIA DA LISTA
-// ============================================================
- 
 void liberarLista() {
     Atendimento* atual = lista;
     while (atual != nullptr) {
@@ -292,10 +240,6 @@ void liberarLista() {
     }
     lista = nullptr;
 }
- 
-// ============================================================
-//  MENU PRINCIPAL
-// ============================================================
  
 void exibirMenu() {
     cout << "\n  ==========================================\n";
@@ -309,10 +253,7 @@ void exibirMenu() {
     cout << "   0. Sair\n";
     cout << "  Opcao: ";
 }
- 
-// ============================================================
-//  MAIN
-// ============================================================
+
  
 int main() {
     int opcao;
