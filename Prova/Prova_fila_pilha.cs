@@ -1,10 +1,5 @@
 using System;
 
-// ============================================================
-// ESTRUTURAS (classes = equivalente a struct com ponteiro)
-// ============================================================
-
-// Representa uma ação registrada
 class Acao
 {
     public int Codigo;     
@@ -14,46 +9,43 @@ class Acao
 
 class NoPilha
 {
-    public Acao    Info;        // Acao info
-    public NoPilha Prox;       // NoPilha* prox  ← referência = ponteiro em C#
+    public Acao    Info;        
+    public NoPilha Prox;       
 }
 
-// Pilha dinâmica (LIFO) — equivalente a:
-// struct Pilha { NoPilha* topo; }
 class Pilha
 {
-    public NoPilha Topo = null; // NoPilha* topo = NULL
+    public NoPilha Topo = null; 
 
-    // Verifica se a pilha está vazia
+    // Verifica se a pilha ta vazia
     public bool Vazia()
     {
-        return Topo == null;    // topo == NULL
+        return Topo == null;    
     }
 
-    // Empilha — equivalente ao new NoPilha do C++
+    
     public void Empilhar(Acao a)
     {
-        NoPilha novo = new NoPilha(); // new NoPilha
-        novo.Info = a;                // novo->info = a
-        novo.Prox = Topo;            // novo->prox = topo
-        Topo = novo;                  // topo = novo
+        NoPilha novo = new NoPilha(); 
+        novo.Info = a;                
+        novo.Prox = Topo;            
+        Topo = novo;                 
 
-        Console.WriteLine($"  [Pilha] Ação \"{a.Descricao}\" registrada.");
+        Console.WriteLine($" [Pilha] Ação \"{a.Descricao}\" registrada.");
     }
 
-    // Desempilha — equivalente ao delete do C++
     public bool Desempilhar()
     {
         if (Vazia())
         {
-            Console.WriteLine("  [Pilha] Nenhuma ação para desfazer.");
+            Console.WriteLine("Nenhuma ação para desfazer.");
             return false;
         }
 
-        NoPilha temp = Topo;         // NoPilha* temp = topo
-        Console.WriteLine($"  [Pilha] Ação desfeita: \"{temp.Info.Descricao}\"");
-        Topo = temp.Prox;            // topo = temp->prox
-        temp = null;                  // delete temp (GC libera a memória)
+        NoPilha temp = Topo;         
+        Console.WriteLine($"Ação desfeita: \"{temp.Info.Descricao}\"");
+        Topo = temp.Prox;            
+        temp = null;                 
         return true;
     }
 
@@ -66,17 +58,17 @@ class Pilha
             return;
         }
 
-        NoPilha atual = Topo;        // NoPilha* atual = topo
+        NoPilha atual = Topo;        
         int i = 1;
-        while (atual != null)        // while (atual != NULL)
+        while (atual != null)        
         {
             Console.WriteLine($"  {i++}. [Cod: {atual.Info.Codigo}] {atual.Info.Descricao}");
-            atual = atual.Prox;      // atual = atual->prox
+            atual = atual.Prox;      
         }
     }
 }
 
-// Representa um chamado técnico
+// Representa um chamado 
 class Chamado
 {
     public int    Numero;
@@ -85,53 +77,51 @@ class Chamado
     public Pilha  Historico = new Pilha(); // pilha de ações do chamado
 }
 
-// Nó da fila — equivalente a:
-// struct NoFila { Chamado info; NoFila* prox; }
+// Nó da fila
 class NoFila
 {
     public Chamado Info;             // Chamado info
     public NoFila  Prox;            // NoFila* prox  ← referência = ponteiro
 }
 
-// Fila dinâmica (FIFO) — equivalente a:
-// struct Fila { NoFila* inicio; NoFila* fim; }
+// Fila dinâmica
 class Fila
 {
-    public NoFila Inicio = null;    // NoFila* inicio = NULL
-    public NoFila Fim    = null;    // NoFila* fim    = NULL
+    public NoFila Inicio = null;    
+    public NoFila Fim    = null;    
 
     // Verifica se a fila está vazia
     public bool Vazia()
     {
-        return Inicio == null;      // inicio == NULL
+        return Inicio == null;      
     }
 
     // Retorna o chamado da frente sem remover
     public Chamado Frente()
     {
         if (Vazia()) return null;
-        return Inicio.Info;         // inicio->info
+        return Inicio.Info;         
     }
 
     // Enfileira novo chamado no fim
     public void Enfileirar(Chamado c)
     {
-        NoFila novo = new NoFila(); // new NoFila
-        novo.Info = c;              // novo->info = c
-        novo.Prox = null;           // novo->prox = NULL
+        NoFila novo = new NoFila(); 
+        novo.Info = c;              
+        novo.Prox = null;           
 
         if (Vazia())
         {
-            Inicio = novo;          // inicio = novo
-            Fim    = novo;          // fim    = novo
+            Inicio = novo;          
+            Fim  = novo;          
         }
         else
         {
-            Fim.Prox = novo;        // fim->prox = novo
-            Fim      = novo;        // fim = novo
+            Fim.Prox = novo;        
+            Fim = novo;        
         }
 
-        Console.WriteLine($"  [Fila] Chamado #{c.Numero} aberto por \"{c.Nome}\".");
+        Console.WriteLine($" Chamado #{c.Numero} aberto por \"{c.Nome}\".");
     }
 
     // Remove o primeiro chamado da fila (atendimento)
@@ -143,12 +133,12 @@ class Fila
             return false;
         }
 
-        NoFila temp = Inicio;       // NoFila* temp = inicio
-        Console.WriteLine($"  [Fila] Atendendo chamado #{temp.Info.Numero} de \"{temp.Info.Nome}\".");
-        Inicio = temp.Prox;         // inicio = temp->prox
+        NoFila temp = Inicio;       
+        Console.WriteLine($"[Fila] Atendendo chamado #{temp.Info.Numero} de \"{temp.Info.Nome}\".");
+        Inicio = temp.Prox;         
         if (Inicio == null)
             Fim = null;
-        temp = null;                // delete temp
+        temp = null;                
         return true;
     }
 
@@ -157,31 +147,32 @@ class Fila
     {
         if (Vazia())
         {
-            Console.WriteLine("  [Fila] Nenhum chamado na fila.");
+            Console.WriteLine("Nenhum chamado na fila.");
             return;
         }
 
-        NoFila atual = Inicio;      // NoFila* atual = inicio
+        NoFila atual = Inicio;   
         int pos = 1;
-        while (atual != null)       // while (atual != NULL)
+        while (atual != null)       
         {
             Console.WriteLine($"  {pos++}. Chamado #{atual.Info.Numero} | {atual.Info.Nome} | {atual.Info.Descricao}");
-            atual = atual.Prox;     // atual = atual->prox
+            atual = atual.Prox;     
         }
     }
 }
 
-// ============================================================
-// MENU E PROGRAMA PRINCIPAL
-// ============================================================
+
+
+
+// MENU PRICIPAL
+
+
 
 class Program
 {
     static void ExibirMenu()
     {
-        Console.WriteLine("\n========================================");
-        Console.WriteLine("   SISTEMA DE CHAMADOS TÉCNICOS");
-        Console.WriteLine("========================================");
+        Console.WriteLine("SISTEMA DE CHAMADOS TÉCNICOS");
         Console.WriteLine("  1 - Abrir novo chamado");
         Console.WriteLine("  2 - Atender próximo chamado");
         Console.WriteLine("  3 - Registrar ação");
@@ -189,15 +180,15 @@ class Program
         Console.WriteLine("  5 - Exibir histórico");
         Console.WriteLine("  6 - Listar fila");
         Console.WriteLine("  0 - Sair");
-        Console.WriteLine("========================================");
         Console.Write("  Opção: ");
     }
 
     static void Main()
     {
-        Fila fila            = new Fila();
+        Console.Clear();
+        Fila fila  = new Fila();
         int contadorChamados = 1;
-        int contadorAcoes    = 1;
+        int contadorAcoes  = 1;
         int opcao;
 
         do
@@ -206,22 +197,22 @@ class Program
 
             if (!int.TryParse(Console.ReadLine(), out opcao))
             {
-                Console.WriteLine("\n  [Erro] Digite um número válido.");
+                Console.WriteLine("\n Digite umA opcao valido.");
                 continue;
             }
 
             switch (opcao)
             {
-                // ----- 1: Abrir novo chamado -----
                 case 1:
                 {
-                    Chamado novo   = new Chamado();
-                    novo.Numero    = contadorChamados++;
+                    Console.Clear();
+                    Chamado novo  = new Chamado();
+                    novo.Numero = contadorChamados++;
 
-                    Console.Write("\n  Nome do solicitante: ");
+                    Console.Write("\nNome do solicitante: ");
                     novo.Nome = Console.ReadLine();
 
-                    Console.Write("  Descrição do chamado: ");
+                    Console.Write("Descrição do chamado: ");
                     novo.Descricao = Console.ReadLine();
 
                     fila.Enfileirar(novo);
@@ -230,6 +221,7 @@ class Program
 
                 // ----- 2: Atender próximo chamado -----
                 case 2:
+                    Console.Clear();
                     Console.WriteLine();
                     fila.Desenfileirar();
                     break;
@@ -237,10 +229,11 @@ class Program
                 // ----- 3: Registrar ação -----
                 case 3:
                 {
+                    Console.Clear();
                     Chamado atual = fila.Frente();  // ponteiro para o primeiro
                     if (atual == null)
                     {
-                        Console.WriteLine("\n  [Erro] Nenhum chamado na fila.");
+                        Console.WriteLine("\n Nenhum chamado na fila.");
                         break;
                     }
 
@@ -255,9 +248,9 @@ class Program
                     break;
                 }
 
-                // ----- 4: Desfazer última ação -----
                 case 4:
                 {
+                    Console.Clear();
                     Chamado atual = fila.Frente();
                     if (atual == null)
                     {
@@ -269,9 +262,10 @@ class Program
                     break;
                 }
 
-                // ----- 5: Exibir histórico -----
+
                 case 5:
                 {
+                    Console.Clear();
                     Chamado atual = fila.Frente();
                     if (atual == null)
                     {
@@ -283,19 +277,17 @@ class Program
                     break;
                 }
 
-                // ----- 6: Listar fila -----
                 case 6:
+                    Console.Clear();
                     Console.WriteLine("\n  Chamados na fila:");
                     fila.Listar();
-                    break;
-
-                // ----- 0: Sair -----
-                case 0:
-                    Console.WriteLine("\n  Encerrando sistema. Até logo!");
+                    Console.Write("Digite qualquer coisa para voltar ao menu");
+                    Console.ReadKey();
+                    Console.Clear();
                     break;
 
                 default:
-                    Console.WriteLine("\n  [Erro] Opção inválida.");
+                    Console.WriteLine("\n  Opção inválida.");
                     break;
             }
 
