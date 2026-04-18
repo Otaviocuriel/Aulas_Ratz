@@ -58,12 +58,12 @@ int main() {
       
       case 4:
          system("cls");
-         cout << "\nTeste 4";
-         break;
+         cout << "Saindo...";
+         exit(0);
       
       default:
          system("cls");
-         cout << "Saindo...";
+         cout << "Opcao inválida";
          exit(0);
       }
 
