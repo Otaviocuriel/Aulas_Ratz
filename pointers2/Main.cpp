@@ -31,6 +31,7 @@ int main() {
 
    while (true)
    {
+      system("cls");
       cout << "----Gerenciador de estoque----" ;
       cout << "\n1. Criar estoque";
       cout << "\n2. Adicionar produto ao um estoque";
@@ -42,30 +43,26 @@ int main() {
       switch (opcao)
       {
       case 1:
-         system("cls");
          cout << "Teste";
          break;
       
       case 2:
-         system("cls");
          cout << "Teste2";
          break;
       
       case 3:
-         system("cls");
          cout << "Teste3";
          break;
       
       case 4:
-         system("cls");
          cout << "Saindo...";
          exit(0);
       
       default:
-         system("cls");
          cout << "Opcao inválida";
-         exit(0);
+         break;
       }
+
 
 
 
