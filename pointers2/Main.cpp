@@ -39,17 +39,46 @@ Estoque adicionarEstoque(){
       return estoque;
     }
 
+void adicionarProduto(Estoque estoques[]) {
 
+   Produto p;
+   cout << "=== Adicionar Produto ===\n";
+
+   // leitura do código do produto (validação simples)
+   cout << "Codigo do produto: ";
+   while (!(cin >> p.codigoProduto)) {
+      cin.clear();
+      cin.ignore(10000, '\n');
+      cout << "Codigo invalido. Digite novamente: ";
+   }
+
+   // descarta o '\n' deixado por >> antes de usar getline/getline-like
+   cin.ignore(10000, '\n');
+
+   // leitura de strings (aceita espaços)
+   cout << "Nome do produto: ";
+   cin.getline(p.nomePoduto, sizeof(p.nomePoduto));
+
+   cout << "Quantidade: ";
+   cin.getline(p.quantidade, sizeof(p.quantidade));
+
+   cout << "Unidade de medida: ";
+   cin.getline(p.unidadeDeMedida, sizeof(p.unidadeDeMedida));
+
+   // grava o produto no primeiro estoque (índice 0)
+   estoques[0].produto = p;
+
+   cout << "Produto adicionado ao estoque \"" << estoques[0].nomeEstoque << "\"\n";
+}
 
 
 int main() {
-   Estoque estoque[0];
+   Estoque estoque[10];
 
    int opcao;
 
    while (true)
    {
-      system("cls");
       cout << "----Gerenciador de estoque----" ;
       cout << "\n1. Criar estoque";
       cout << "\n2. Adicionar produto ao um estoque";
@@ -62,9 +91,10 @@ int main() {
       {
       case 1:
          adicionarEstoque();
+         break;
       
       case 2:
-         cout << "Teste2";
+         adicionarProduto(estoque);
          break;
       
       case 3:
